@@ -19,8 +19,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -129,5 +132,28 @@ public class CourseEndpointTest {
         System.out.println("Testing is server UP");
         given().when().get("/course").then().statusCode(200);
     }
+    
+    @Test
+    public void testGetAllCourse() {
+        given()
+                .contentType("application/json")
+                .get("/course/all").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("courseName", containsInAnyOrder("Hot yoga", "Normal yoga"))
+                .body("description", containsInAnyOrder("It is hot","It is normal"));
+    }
+    
+//    @Test
+//    public void testGetAllCourseWithYoga() {
+//        given()
+//                .contentType("application/json")
+//                .get("/course/allyogaclass").then()
+//                .assertThat()
+//                .statusCode(HttpStatus.OK_200.getStatusCode())
+//                .body("courseName", containsInAnyOrder("Hot yoga", "Normal yoga"))
+//                .body("description", containsInAnyOrder("It is hot","It is normal"))
+//                .body("yogaClasss", contains(yoga1));
+//    }
 
 }

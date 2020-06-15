@@ -103,5 +103,18 @@ public class CourseFacade {
             em.close();
         }
     }
+   
+   public CourseDTO addCourse(CourseDTO cDTO) {
+       EntityManager em = getEntityManager();
+       Course c = new Course(cDTO.getCourseName(), cDTO.getDescription());
+       try{
+           em.getTransaction().begin();
+           em.persist(c);
+           em.getTransaction().commit();
+           return new CourseDTO(c);
+       } finally {
+           em.close();
+       }
+   }
 
 }

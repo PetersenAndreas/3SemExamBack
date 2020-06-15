@@ -47,6 +47,11 @@ public class Course implements Serializable {
         this.yogaClasss = yogaClasss;
     }
     
+    public Course(String courseName, String description) {
+        this.courseName = courseName;
+        this.description = description;
+    }
+    
     public String getCourseName() {
         return courseName;
     }

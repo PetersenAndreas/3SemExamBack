@@ -145,5 +145,11 @@ public class CourseFacadeTest {
         List<CourseDTO> courses = facade.getAllCoursesWithYogaClass();
         assertEquals(ExpectedSize, courses.size());
     }
+    
+//    @Test
+//    public void testAddCourse() {
+//        CourseDTO courseDTO = new CourseDTO("Course 1", "Description for course1");
+//        CourseDTO cDTO = facade.addCourse(courseDTO);
+//    }
 
 }
